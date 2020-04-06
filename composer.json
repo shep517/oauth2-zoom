@@ -1,5 +1,5 @@
 {
-    "name": "iflorespaz/oauth2-zoom",
+    "name": "ntpages/oauth2-zoom",
     "description": "Zoom OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
     "license": "MIT",
     "authors": [
