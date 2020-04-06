@@ -26,7 +26,7 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function getId()
     {
-        return $this->response['data']['account_id'] ?: null;
+        return $this->response['id'] ?: null;
     }
 
     /**
@@ -36,10 +36,10 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function getImageurl()
     {
-        if (empty($this->response['data']['pic_url'])) {
+        if (empty($this->response['pic_url'])) {
             return null;
         }
-        return $this->response['data']['pic_url'];
+        return $this->response['pic_url'];
     }
     /**
      * Alias for getImageurl() for higher compatablility.
@@ -67,7 +67,7 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function getFirstName()
     {
-        return $this->response['data']['first_name'] ?: null;
+        return $this->response['first_name'] ?: null;
     }
     /**
      * Get resource last name.
@@ -76,7 +76,7 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function getLastName()
     {
-        return $this->response['data']['last_name'] ?: null;
+        return $this->response['last_name'] ?: null;
     }
 
     /**
@@ -86,7 +86,7 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function getNickname()
     {
-        return $this->response['data']['account_id'] ?: null;
+        return $this->response['account_id'] ?: null;
     }
     /**
      * Alias for getNickname() for higher compatablility.
@@ -105,7 +105,7 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function getUrl()
     {
-        return $this->response['data']['url'] ?: null;
+        return $this->response['url'] ?: null;
     }
 
     /**
@@ -115,6 +115,6 @@ class ZoomResourceOwner implements ResourceOwnerInterface
      */
     public function toArray()
     {
-        return $this->response['data'];
+        return $this->response;
     }
 }

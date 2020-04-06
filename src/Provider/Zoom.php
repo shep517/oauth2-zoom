@@ -2,8 +2,10 @@
 
 namespace League\OAuth2\Client\Provider;
 
+use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Provider\Exception\PinterestIdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Token\AccessTokenInterface;
 use Psr\Http\Message\ResponseInterface;
 
 class Zoom extends AbstractProvider
@@ -55,7 +57,30 @@ class Zoom extends AbstractProvider
      */
     public function getBaseAuthorizationUrl()
     {
-        return 'https://zoom.us/oauth';
+        return 'https://zoom.us/oauth/authorize';
+    }
+
+    /**
+     * Returns authorization parameters based on provided options.
+     *
+     * @param  array $options
+     * @return array Authorization parameters
+     */
+    protected function getAuthorizationParameters(array $options)
+    {
+        $options += [
+            'response_type'   => 'code'
+        ];
+
+        // Business code layer might set a different redirect_uri parameter
+        // depending on the context, leave it as-is
+        if (!isset($options['redirect_uri'])) {
+            $options['redirect_uri'] = $this->redirectUri;
+        }
+
+        $options['client_id'] = $this->clientId;
+
+        return $options;
     }
 
     /**
@@ -69,7 +94,7 @@ class Zoom extends AbstractProvider
     {
         return 'https://zoom.us/oauth/token';
     }
-    
+
     /**
      * Get provider url to fetch user details
      *
@@ -126,7 +151,7 @@ class Zoom extends AbstractProvider
     {
         return ['read'];
     }
-    
+
     /**
      * Check a provider response for errors.
      *
@@ -145,7 +170,7 @@ class Zoom extends AbstractProvider
             );
         }
     }
-    
+
     /**
      * Generate a user object from a successful user details request.
      *
@@ -158,10 +183,10 @@ class Zoom extends AbstractProvider
         return new ZoomResourceOwner($response);
     }
 
-	protected function getDefaultHeaders()
-	{
-	  return [ 'Accept' => 'application/json', 'User-Agent' => 'iflorespaz/oauth2-zoom/1.0.0' ];
-	}
+    protected function getDefaultHeaders()
+    {
+        return [ 'Accept' => 'application/json', 'User-Agent' => 'iflorespaz/oauth2-zoom/1.0.0' ];
+    }
 
     /**
      * Sets host.
@@ -176,4 +201,5 @@ class Zoom extends AbstractProvider
 
         return $this;
     }
+
 }
