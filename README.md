@@ -9,7 +9,7 @@ This package provides Zoom OAuth 2.0 support for the PHP League's [OAuth 2.0 Cli
 To install, use composer:
 
 ```
-composer require iflorespaz/oauth2-zoom
+composer require ntpages/oauth2-zoom
 ```
 
 ## Usage
